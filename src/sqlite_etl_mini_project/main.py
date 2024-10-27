@@ -1,8 +1,8 @@
 import sys
 import argparse
-from my_lib.extract import extract
-from my_lib.transform import transform_n_load
-from my_lib.crud import (
+from .my_lib.extract import extract
+from .my_lib.transform import transform_n_load
+from .my_lib.crud import (
     read_data,
     read_all_data,
     save_data,

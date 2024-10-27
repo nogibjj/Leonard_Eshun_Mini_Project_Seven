@@ -7,8 +7,8 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "sqlite_etl_mini_project"
 description = "A Duke MSc Data Science, Data Engineering Mini project to package a python project."
-# version = "2024.1.0"
-dynamic = ["version"]
+version = "2024.1.0"
+# dynamic = ["version"]
 readme = "README.md"
 dependencies = [
   "requests==2.32.3"

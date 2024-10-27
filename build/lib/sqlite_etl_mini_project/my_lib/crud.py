@@ -1,9 +1,9 @@
 import sqlite3
-from my_lib.util import log_tests
+from .util import log_tests, db_path
 
 
 def get_table_columns(database_name: str, table_name: str):
-    conn = sqlite3.connect("data/" + database_name)
+    conn = sqlite3.connect(db_path + database_name)
     c = conn.cursor()
     to_execute = f"SELECT name FROM pragma_table_info('{table_name}')"
     log_tests("Executing query...")
@@ -21,7 +21,7 @@ def get_primary_key(cursor, table_name):
 
 
 def read_data(database_name: str, table_name: str, data_id: int):
-    conn = sqlite3.connect("data/" + database_name)
+    conn = sqlite3.connect(db_path + database_name)
     c = conn.cursor()
     to_execute = (
         f"select * from {table_name} where {get_primary_key(c, table_name)} = {data_id}"
@@ -38,7 +38,7 @@ def read_data(database_name: str, table_name: str, data_id: int):
 
 
 def read_all_data(database_name: str, table_name: str):
-    conn = sqlite3.connect("data/" + database_name)
+    conn = sqlite3.connect(db_path + database_name)
     c = conn.cursor()
     to_execute = f"select * from {table_name}"
     log_tests("Executing query...")
@@ -53,7 +53,7 @@ def read_all_data(database_name: str, table_name: str):
 
 
 def save_data(database_name: str, table_name: str, row: list):
-    conn = sqlite3.connect("data/" + database_name)
+    conn = sqlite3.connect(db_path + database_name)
     c = conn.cursor()
     col_names = ", ".join(get_table_columns(database_name, table_name))
     data_values = "', '".join(row)
@@ -68,7 +68,7 @@ def save_data(database_name: str, table_name: str, row: list):
 
 
 def delete_data(database_name: str, table_name: str, data_id: int):
-    conn = sqlite3.connect("data/" + database_name)
+    conn = sqlite3.connect(db_path + database_name)
     c = conn.cursor()
     to_execute = (
         f"delete from {table_name} where {get_primary_key(c, table_name)} = {data_id}"
@@ -85,7 +85,7 @@ def delete_data(database_name: str, table_name: str, data_id: int):
 def update_data(
     database_name: str, table_name: str, things_to_update: dict, data_id: int
 ):
-    conn = sqlite3.connect("data/" + database_name)
+    conn = sqlite3.connect(db_path + database_name)
     c = conn.cursor()
     set_values = ", ".join(
         [(k + "='" + v + "'") for (k, v) in things_to_update.items()]

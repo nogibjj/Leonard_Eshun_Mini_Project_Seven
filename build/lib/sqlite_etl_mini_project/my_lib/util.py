@@ -1,3 +1,9 @@
+import os.path
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+db_path = os.path.join(BASE_DIR, "../", "data/")
+
+
 def log_tests(log, issql=False, header=False, last_in_group=False, new_log_file=False):
     log = log.strip()
     with open("Test_Log.md", "w" if new_log_file else "a") as file:
