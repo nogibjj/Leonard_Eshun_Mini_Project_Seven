@@ -1,6 +1,6 @@
 from src.sqlite_etl_mini_project.my_lib.extract import extract
 from src.sqlite_etl_mini_project.my_lib.transform import transform_n_load
-from src.sqlite_etl_mini_project.my_lib.util import log_tests
+from src.sqlite_etl_mini_project.my_lib.util import log_tests, db_path
 import os
 from src.sqlite_etl_mini_project.my_lib.crud import (
     read_data,
@@ -10,6 +10,7 @@ from src.sqlite_etl_mini_project.my_lib.crud import (
     update_data,
     get_table_columns,
 )
+
 
 column_map = {
     "air_quality_id": 0,
@@ -32,8 +33,8 @@ column_map = {
 def test_extract():
     log_tests("Extraction Test", header=True, new_log_file=True)
     log_tests("Removing existing CSV file exists")
-    if os.path.exists("data/air_quality.csv"):
-        os.remove("data/air_quality.csv")
+    if os.path.exists(db_path + "air_quality.csv"):
+        os.remove(db_path + "air_quality.csv")
 
     log_tests("Confirming that CSV file doesn't exists...")
     assert not os.path.exists("population_bar.png")
@@ -46,7 +47,7 @@ def test_extract():
     )
 
     log_tests("Testing if CSV file exists...")
-    assert os.path.exists("data/air_quality.csv")
+    assert os.path.exists(db_path + "air_quality.csv")
     log_tests("Extraction Test Successful", last_in_group=True)
     print("Extraction Test Successful")
 
