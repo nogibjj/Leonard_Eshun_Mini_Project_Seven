@@ -14,6 +14,12 @@ pip install "path_to_the_package_file"
 ```
 Where "path_to_the_package_file" is the path to the package file for distributing this application and ends in _tar.gz_.   
 
+> [!NOTE]
+> The optional dependencies defined in the .toml file are black (22.3.0), pytest (7.4.0), ruff (0.6.5). These are not regularly used by the end user but are used during development and testing. To install the optional dependencies, use:
+
+```
+pip install dist/sqlite_etl_mini_project-0.0.0.tar.gz [black,pytest,ruff]
+```
 
 
 ## The CLI Commands
@@ -168,11 +174,5 @@ and follow with the argument information below, leaving space between arguments.
 > [!IMPORTANT]
 > It's important to provide the arguments in the order and formats as desribed above for the CLI to work.   
 
-> [!NOTE]
-> The optional dependencies defined in the .toml file are black (22.3.0), pytest (7.4.0), ruff (0.6.5). These are not regularly used by the end user but are used > during development and testing. To use optional dependencies, use:
-
-```
-pip install dist/sqlite_etl_mini_project-0.0.0.tar.gz [black,pytest,ruff]
-```
 
 This selects includes all 3 optional dependencies during installation. Any number or combinations can be used.
