@@ -176,6 +176,10 @@ Where ``sqlite_etl_mini_project`` is the name of the package.
 I repeated the last two processes until the package worked as expected.   
 
 
+## Package Download
+Please download the package here: [Package for distribution](dist/sqlite_etl_mini_project-2024.1.0.tar.gz)    
+
+
 ## References
 **Official guides**   
 \- [Official Setuptools Quick Start](https://setuptools.pypa.io/en/latest/userguide/quickstart.html)   
