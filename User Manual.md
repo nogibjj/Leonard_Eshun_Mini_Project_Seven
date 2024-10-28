@@ -1,12 +1,12 @@
 # User Manual
 
-## Table of contents
+**Table of contents**  
 1. How to install the package
 1. The CLI commands
 1. How to use the Commands
 
 
-## How to install the package
+## How to install the package  
 
 At the command prompt, type:   
 ```
