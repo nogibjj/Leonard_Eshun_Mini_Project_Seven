@@ -1,16 +1,22 @@
+# User Manual
+
+## Table of contents
+1. How to install the package
+1. The CLI commands
+1. How to use the Commands
+
+
+## How to install the package
+
+At the command prompt, type:   
+```
+pip install "path_to_the_package_file"
+```
+Where "path_to_the_package_file" is the path to the package file for distributing this application and ends in _tar.gz_.   
 
 
 
-This repository is created as an assignment from the Data Engineering course, IDS 706. The aim is to package a python script into a command-line tool.
-
-The requirements are:
-1. Package a Python script with setuptools or a similar tool
-1. Include a user guide on how to install and use the tool
-1. Do the standard CI/CD setup
-1. Include communication with an external or internal database (NoSQL, SQL, etc)
-
-
-## The functions and what they do
+## The CLI Commands
 
 1. **extract** to extract the read an external csv file via its url and save to file in the /data folder using the name you give it. The database will be created if it doesn't exist.
 	```python
@@ -99,15 +105,16 @@ The requirements are:
 	```
 	The parameters are:
 	- database_name : The name of the SQLite database.
-	- table_name : The name of the table in the SQLite database.
+	- table_name : The name of the table in the SQLite database.   
 
-## CLI Integration
+
+
+## How to use the Commands
 The main.py script provides a CLI allowing the ETL and CRUD operations to be done from the command line.
 
-optional dependencies
 
-[project.scripts]
-sqlite_etl = "sqlite_etl_mini_project.main:main"
+sqlite_etl read_all_data "air_quality.db" "indicator"
+
 
 At the cli prompt, type:
 ```
@@ -159,9 +166,13 @@ and follow with the argument information below, leaving space between arguments.
 ```
 
 > [!IMPORTANT]
-> It's important to provide the arguments in the order and formats as desribed above for the CLI to work.
+> It's important to provide the arguments in the order and formats as desribed above for the CLI to work.   
 
-## Log of successful operations
-The test operation saved its steps to a log file to show the success of the operations.
+> [!NOTE]
+> The optional dependencies defined in the .toml file are black (22.3.0), pytest (7.4.0), ruff (0.6.5). These are not regularly used by the end user but are used > during development and testing. To use optional dependencies, use:
 
-[Please find the file here](Test_Log.md)
+```
+pip install dist/sqlite_etl_mini_project-0.0.0.tar.gz [black,pytest,ruff]
+```
+
+This selects includes all 3 optional dependencies during installation. Any number or combinations can be used.
