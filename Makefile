@@ -5,7 +5,7 @@ format:
 	black *.py
 
 lint:
-	ruff check *.py my_lib/*.py
+	ruff check *.py src/sqlite_etl_mini_project/my_lib/*.py
 
 test:
 	python -m pytest -cov=main test_main.py
