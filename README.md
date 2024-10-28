@@ -93,6 +93,20 @@ source myenv/bin/activate
 # Deactivate when done the environment and revert to the system environment
 deactivate
 ```
+Here are some other useful commands for setting up the virtual environment:   
+```
+# To initialize it with all the requirements of your project already listed for Github
+pip install -r requirements.txt
+
+# To display the system/virtual python environment currently being used
+which python
+
+# To display the version of python being used
+python --version  
+
+# This can be run in the system python environment to get all the current project dependencies
+pip freeze > requirements.txt
+```
 
 **2\. Setup a Setuptools compliant file structure**   
 Setuptools expect specific file structures in order to know what to add to the package and how.   
