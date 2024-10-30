@@ -2,11 +2,12 @@
 
 **Table of contents**  
 1. How to install the package
-1. The CLI commands
-1. How to use the Commands
+1. The CLI Commands
+1. CLI Command Examples
+1. The functions behind the CLI commands
 
 
-## How to install the package  
+## 1. How to install the package  
 
 At the command prompt, type:   
 ```
@@ -22,7 +23,117 @@ pip install dist/sqlite_etl_mini_project-0.0.0.tar.gz [black,pytest,ruff]
 ```
 
 
-## The CLI Functions
+
+## 2. The CLI Commands
+The standard form for a commnad in this scripts' CLI are:   
+```
+sqlite_etl "command" "arguments"
+```
+
+**The commands are:**   
+1. extract 
+1. transform_n_load 
+1. read_data 
+1. read_all_data 
+1. save_data 
+1. delete_data 
+1. update_data 
+1. get_table_columns 
+
+
+**Then follow with the relevant argument below, leaving a space between arguments:**   
+
+```python
+	extract:   
+		url			(type = string)
+        file_name	(type = string)
+
+	transform_n_load:   
+        local_dataset		(type = string)
+        database_name		(type = string)
+        new_data_tables 	(type=dict)
+        new_lookup_tables 	(type=dict)
+        column_attributes 	(type=dict)
+        column_map 			(type=dict)
+
+    read_data:   
+        database_name	(type = string)
+        table_name		(type = string)
+        data_id 		(type=int)
+
+    read_all_data:   
+        database_name	(type = string)
+        table_name		(type = string)
+
+    save_data:   
+        database_name	(type = string)
+        table_name		(type = string)
+        row 			(type = list)
+
+    update_data:   
+        database_name		(type = string)
+        table_name			(type = string)
+        data_id				(type = int)
+        things_to_update 	(type = dict)
+
+    delete_data:   
+        database_name	(type = string)
+        table_name		(type = string)
+        data_id 		(type=int)
+
+    get_table_columns:   
+        database_name	(type = string)
+        table_name		(type = string)
+```
+
+> [!IMPORTANT]
+> It's important to provide the arguments in the order and formats as desribed above for the CLI to work.   
+>When adding arguments like lists or dictionary, please ensure that the outer quotes are double quotes and the individual inner items have single quotes (or vice-versa) so it knows where the list starts and ends.
+
+
+## 3. CLI Command Examples
+
+1\. extract:   
+	```
+	sqlite_etl extract "https://data.cityofnewyork.us/resource/c3uy-2p5r.csv?%24limit=200000" "air_quality.csv"
+	```
+
+2\. transform_and_load:   
+	```
+	sqlite_etl transform_n_load "air_quality.csv" "air_quality.db" '{"air_quality":["air_quality_id","fn_indicator_id","fn_geo_id","time_period","start_date","data_value"]}' '{"indicator":["indicator_id","indicator_name","measure","measure_info"],"geo_data":["geo_id","geo_place_name","geo_type_name"]}' '{"air_quality_id":"INTEGER PRIMARY KEY","indicator_id":"INTEGER PRIMARY KEY","indicator_name":"TEXT","measure":"TEXT","measure_info":"TEXT","geo_type_name":"TEXT","geo_id":"INTEGER PRIMARY KEY","geo_place_name":"TEXT","time_period":"TEXT","start_date":"TEXT","data_value":"REAL","fn_indicator_id":"INTEGER","fn_geo_id":"INTEGER"}' '{"air_quality_id":0,"indicator_id":1,"indicator_name":2,"measure":3,"measure_info":4,"geo_type_name":5,"geo_id":6,"geo_place_name":7,"time_period":8,"start_date":9,"data_value":10,"fn_geo_id":6,"fn_indicator_id":1}'
+	```
+
+3\. read_data:   
+	```
+	sqlite_etl read_data "air_quality.db" geo_data 101
+	```
+
+4\. read_all_data:   
+	```
+	sqlite_etl read_all_data "air_quality.db" indicator
+	```
+
+5\. save_data:    
+	```
+	save_data "air_quality.db" geo_data "['100000', 'Lancaster', 'UFO']"
+	```
+
+6\. delete_data:    
+	```
+	sqlite_etl delete_data "air_quality.db" geo_data '100000'
+	```
+
+7\. update_data:    
+	```
+	sqlite_etl update_data "air_quality.db" "geo_data" '{"geo_place_name": "Northeast-Bronx"}' '102' 
+	```
+
+8\. get_table_columns:    
+	```
+	sqlite_etl get_table_columns "air_quality.db" "air_quality"
+	```
+
+## 4. The functions behind the CLI commands
 
 1. **extract** to extract the read an external csv file via its url and save to file in the /data folder using the name you give it. The database will be created if it doesn't exist.
 	```python
@@ -113,114 +224,4 @@ pip install dist/sqlite_etl_mini_project-0.0.0.tar.gz [black,pytest,ruff]
 	The parameters are:
 	- database_name : The name of the SQLite database.
 	- table_name : The name of the table in the SQLite database.   
-
-
-
-## How to use the CLI Commands
-The standard form for a commnad in this scripts' CLI are:   
-```
-sqlite_etl "command" "arguments"
-```
-
-**The commands are:**   
-1. extract 
-1. transform_n_load 
-1. read_data 
-1. read_all_data 
-1. save_data 
-1. delete_data 
-1. update_data 
-1. get_table_columns 
-
-
-**Then follow with the relevant argument below, leaving a space between arguments:**   
-
-```python
-	extract:
-   		url			(type = string)
-        file_name	(type = string)
-
-    transform_n_load:
-        local_dataset		(type = string)
-        database_name		(type = string)
-        new_data_tables 	(type=dict)
-        new_lookup_tables 	(type=dict)
-        column_attributes 	(type=dict)
-        column_map 			(type=dict)
-
-    read_data:
-        database_name	(type = string)
-        table_name		(type = string)
-        data_id 		(type=int)
-
-    read_all_data:
-        database_name	(type = string)
-        table_name		(type = string)
-
-    save_data:
-        database_name	(type = string)
-        table_name		(type = string)
-        row 			(type = list)
-
-    update_data:
-        database_name		(type = string)
-        table_name			(type = string)
-        data_id 			(type = int)
-        things_to_update 	(type = dict)
-
-    delete_data:
-        database_name	(type = string)
-        table_name		(type = string)
-        data_id 		(type=int)
-
-    get_table_columns:
-        database_name	(type = string)
-        table_name		(type = string)
-```
-
-> [!IMPORTANT]
-> It's important to provide the arguments in the order and formats as desribed above for the CLI to work.   
->When adding arguments like lists or dictionary, please ensure that the outer quotes are double quotes and the individual inner items have single quotes (or vice-versa) so it knows where the list starts and ends.
-
-**Examples:**
-
-1\. extract:
-	```
-	sqlite_etl extract "https://data.cityofnewyork.us/resource/c3uy-2p5r.csv?%24limit=200000" "air_quality.csv"
-	```
-
-2\. transform_and_load:
-	```
-	sqlite_etl transform_n_load "air_quality.csv" "air_quality.db" '{"air_quality":["air_quality_id","fn_indicator_id","fn_geo_id","time_period","start_date","data_value"]}' '{"indicator":["indicator_id","indicator_name","measure","measure_info"],"geo_data":["geo_id","geo_place_name","geo_type_name"]}' '{"air_quality_id":"INTEGER PRIMARY KEY","indicator_id":"INTEGER PRIMARY KEY","indicator_name":"TEXT","measure":"TEXT","measure_info":"TEXT","geo_type_name":"TEXT","geo_id":"INTEGER PRIMARY KEY","geo_place_name":"TEXT","time_period":"TEXT","start_date":"TEXT","data_value":"REAL","fn_indicator_id":"INTEGER","fn_geo_id":"INTEGER"}' '{"air_quality_id":0,"indicator_id":1,"indicator_name":2,"measure":3,"measure_info":4,"geo_type_name":5,"geo_id":6,"geo_place_name":7,"time_period":8,"start_date":9,"data_value":10,"fn_geo_id":6,"fn_indicator_id":1}'
-	```
-
-3\. read_data:
-	```
-	sqlite_etl read_data "air_quality.db" geo_data 101
-	```
-
-4\. read_all_data:
-	```
-	sqlite_etl read_all_data "air_quality.db" indicator
-	```
-
-5\. save_data: 
-	```
-	save_data "air_quality.db" geo_data "['100000', 'Lancaster', 'UFO']"
-	```
-
-6\. delete_data: 
-	```
-	sqlite_etl delete_data "air_quality.db" geo_data '100000'
-	```
-
-7\. update_data: 
-	```
-	sqlite_etl update_data "air_quality.db" "geo_data" '{"geo_place_name": "Northeast-Bronx"}' '102' 
-	```
-	
-8\. get_table_columns: 
-	```
-	sqlite_etl get_table_columns "air_quality.db" "air_quality"
-	```
 
