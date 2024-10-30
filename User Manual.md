@@ -44,9 +44,9 @@ sqlite_etl "command" "arguments"
 **Then follow with the relevant argument below, leaving a space between arguments:**   
 
 ```python
-	extract:   
-		url			(type = string)
-        file_name	(type = string)
+extract:   
+	url			(type = string)
+        file_name		(type = string)
 
 	transform_n_load:   
         local_dataset		(type = string)
@@ -54,35 +54,35 @@ sqlite_etl "command" "arguments"
         new_data_tables 	(type=dict)
         new_lookup_tables 	(type=dict)
         column_attributes 	(type=dict)
-        column_map 			(type=dict)
+        column_map 		(type=dict)
 
     read_data:   
-        database_name	(type = string)
+        database_name		(type = string)
         table_name		(type = string)
         data_id 		(type=int)
 
     read_all_data:   
-        database_name	(type = string)
+        database_name		(type = string)
         table_name		(type = string)
 
     save_data:   
-        database_name	(type = string)
+        database_name		(type = string)
         table_name		(type = string)
         row 			(type = list)
 
     update_data:   
         database_name		(type = string)
-        table_name			(type = string)
-        data_id				(type = int)
+        table_name		(type = string)
+        data_id			(type = int)
         things_to_update 	(type = dict)
 
     delete_data:   
-        database_name	(type = string)
+        database_name		(type = string)
         table_name		(type = string)
         data_id 		(type=int)
 
     get_table_columns:   
-        database_name	(type = string)
+        database_name		(type = string)
         table_name		(type = string)
 ```
 
