@@ -22,7 +22,7 @@ pip install dist/sqlite_etl_mini_project-0.0.0.tar.gz [black,pytest,ruff]
 ```
 
 
-## The CLI Commands
+## The CLI Functions
 
 1. **extract** to extract the read an external csv file via its url and save to file in the /data folder using the name you give it. The database will be created if it doesn't exist.
 	```python
@@ -86,6 +86,7 @@ pip install dist/sqlite_etl_mini_project-0.0.0.tar.gz [black,pytest,ruff]
 	- table_name : The name of the table in the SQLite database.
 	- row : A list of the items to be saved. The order should follow the exact output of the ```get_table_columns``` function for that table.
 
+
 1. **delete_data** to delete a record from the database given a record ID.
 	```python
 	delete_data(database_name: str, table_name: str, data_id: int)
@@ -115,7 +116,7 @@ pip install dist/sqlite_etl_mini_project-0.0.0.tar.gz [black,pytest,ruff]
 
 
 
-## How to use the Commands
+## How to use the CLI Commands
 The standard form for a commnad in this scripts' CLI are:   
 ```
 sqlite_etl "command" "arguments"
@@ -179,7 +180,7 @@ sqlite_etl "command" "arguments"
 
 > [!IMPORTANT]
 > It's important to provide the arguments in the order and formats as desribed above for the CLI to work.   
-
+>When adding arguments like lists or dictionary, please ensure that the outer quotes are double quotes and the individual inner items have single quotes (or vice-versa) so it knows where the list starts and ends.
 
 **Examples:**
 
@@ -205,15 +206,21 @@ sqlite_etl "command" "arguments"
 
 5\. save_data: 
 	```
+	save_data "air_quality.db" geo_data "['100000', 'Lancaster', 'UFO']"
 	```
-	
+
 6\. delete_data: 
 	```
+	sqlite_etl delete_data "air_quality.db" geo_data '100000'
 	```
+
 7\. update_data: 
 	```
+	sqlite_etl update_data "air_quality.db" "geo_data" '{"geo_place_name": "Northeast-Bronx"}' '102' 
 	```
+	
 8\. get_table_columns: 
 	```
+	sqlite_etl get_table_columns "air_quality.db" "air_quality"
 	```
 

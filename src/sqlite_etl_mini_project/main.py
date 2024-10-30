@@ -1,8 +1,8 @@
 import sys
 import argparse
-from my_lib.extract import extract
-from my_lib.transform import transform_n_load
-from my_lib.crud import (
+from .my_lib.extract import extract
+from .my_lib.transform import transform_n_load
+from .my_lib.crud import (
     read_data,
     read_all_data,
     save_data,
@@ -26,6 +26,7 @@ def handle_arguments(args):
             "save_data",
             "delete_data",
             "update_data",
+            "get_table_columns",
         ],
     )
 
@@ -117,7 +118,7 @@ def main():
             )
         )
 
-    elif args.action == "update_data":
+    elif args.Functions == "update_data":
         print(
             update_data(
                 args.database_name,

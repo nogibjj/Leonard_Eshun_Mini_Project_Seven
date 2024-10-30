@@ -105,3 +105,43 @@ Executing query... <br />
 select * from geo_data where geo_id = 101
 ```
 
+Executing query... <br />
+```sql
+SELECT name FROM pragma_table_info('geo_data')
+```
+
+Executing query... <br />
+```sql
+SELECT name FROM pragma_table_info('geo_data')
+```
+
+Executing query... <br />
+```sql
+INSERT INTO geo_data (geo_id, geo_place_name, geo_type_name) VALUES ('100000', 'Lancaster', 'UFO')
+```
+
+Executing query... <br />
+```sql
+SELECT name FROM pragma_table_info('geo_data')
+```
+
+Executing query... <br />
+```sql
+INSERT INTO geo_data (geo_id, geo_place_name, geo_type_name) VALUES ('100000', 'Lancaster', 'UFO')
+```
+
+Executing query... <br />
+```sql
+delete from geo_data where geo_id = 100000
+```
+
+Executing query... <br />
+```sql
+UPDATE geo_data SET geo_place_name='Northeast-Bronx' WHERE geo_id = 102
+```
+
+Executing query... <br />
+```sql
+SELECT name FROM pragma_table_info('air_quality')
+```
+
